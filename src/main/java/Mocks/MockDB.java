@@ -1,7 +1,9 @@
 package Mocks;
 
 import Util.*;
+import org.bson.Document;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,14 @@ public class MockDB implements IDataStore {
     List<Cycle> cycleQueue = new ArrayList<>();
     List<Cycle> cycleHistory = new ArrayList<>();
     List<Temperature> temperatures = new ArrayList<>();
+
+    public MockDB() {
+        List<Stage> stages = new ArrayList<>();
+        stages.add(new Stage(55.0, 10));
+        stages.add(new Stage(60.0, 5));
+        Cycle cycle = new Cycle(new Date(), "Test", 0, "", stages, false);
+        cycleQueue.add(cycle);
+    }
 
     @Override
     public boolean newCycle(Cycle cycle) {
@@ -54,16 +64,19 @@ public class MockDB implements IDataStore {
 
     @Override
     public boolean logTemperature(Temperature temp) {
-        Double temperature = temp.temperature();
-        Date date = temp.date();
-        System.out.println("Temp: " + temperature);
-        temperatures.add(new Temperature(temperature, date));
+        System.out.println("Temp: " + temp.temperature());
+        temperatures.add(temp);
         return true;
     }
 
     @Override
-    public boolean updateCycle(String id, List<Pair<String, ?>> updates) {
-        return false;
+    public boolean updateCycle(Cycle cycle) {
+        for (Cycle queue: cycleQueue) {
+            if (queue.getId().trim().equals(cycle.getId().trim()))
+                cycleQueue.set(cycleQueue.indexOf(queue), cycle);
+        }
+
+        return true;
     }
 
     @Override
@@ -77,8 +90,11 @@ public class MockDB implements IDataStore {
         for (Cycle cycle: cycleQueue)
             if (cycle.getId().matches(cycleID))
                 remove = cycle;
-        cycleQueue.remove(remove);
-        cycleHistory.add(remove);
+        if (remove != null) {
+            cycleQueue.remove(remove);
+            cycleHistory.add(remove);
+        }
+
         return true;
     }
 }

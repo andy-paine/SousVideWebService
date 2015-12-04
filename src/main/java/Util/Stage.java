@@ -1,13 +1,15 @@
 package Util;
 
+import com.google.gson.annotations.Expose;
+
 import java.time.Duration;
 
 /**
  * Created by andy on 05/10/15.
  */
 public class Stage {
-    private Double temperature;
-    private int duration;
+    @Expose private Double temperature;
+    @Expose private int duration;
 
     public Stage(Double temperature, int minutes) {
         this.temperature = temperature;

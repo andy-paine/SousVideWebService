@@ -6,6 +6,7 @@ import com.mongodb.client.*;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +19,7 @@ public class MongoDB implements IDataStore {
     MongoCollection cycles;
     MongoCollection temperatures;
     Gson gson;
+    private Cycle cycle;
 
     public MongoDB() {
         MongoClient client = new MongoClient();
@@ -77,12 +79,18 @@ public class MongoDB implements IDataStore {
     }
 
     @Override
-    public boolean updateCycle(String cycleID, List<Pair<String, ?>> updates) {
+    public boolean updateCycle(Cycle cycle) {
         Document changes = new Document();
-        for (Pair<String, ?> update: updates) {
-            changes.append(update.key(), update.value());
+        for (Field field: Cycle.class.getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                changes.append(field.getName(), field.get(cycle));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
-        UpdateResult result = cycles.updateOne(new Document("_id", cycleID), new Document("$set", changes));
+
+        UpdateResult result = cycles.updateOne(new Document("_id", cycle.getId()), new Document("$set", changes));
         return result.wasAcknowledged();
     }
 

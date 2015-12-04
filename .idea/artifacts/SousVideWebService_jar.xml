@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SousVideWebService:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SousVideWebService_jar</output-path>
+    <root id="archive" name="SousVideWebService.jar">
+      <element id="module-output" name="SousVideWebService" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/restlet/jse/org.restlet.lib.org.json/2.0/org.restlet.lib.org.json-2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/restlet/jse/org.restlet.ext.ssl/2.1.2/org.restlet.ext.ssl-2.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/simpleframework/simple/4.1.21/simple-4.1.21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/restlet/jse/org.restlet.ext.json/2.1.2/org.restlet.ext.json-2.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsslutils/jsslutils/1.0.5/jsslutils-1.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.5/gson-2.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/restlet/jse/org.restlet/2.1.2/org.restlet-2.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mongodb/mongo-java-driver/3.1.1/mongo-java-driver-3.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/restlet/jse/org.restlet.ext.simple/2.1.2/org.restlet.ext.simple-2.1.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

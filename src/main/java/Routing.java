@@ -1,6 +1,5 @@
-import GET.Temperatures;
-import Mocks.MockDB;
-import POST.NewCycle;
+import Cycle.*;
+import Temperature.*;
 import Util.IDataStore;
 import Util.MongoDB;
 import org.restlet.Application;
@@ -14,15 +13,21 @@ public class Routing extends Application {
 
     @Override
     public synchronized Restlet createInboundRoot() {
-        // Create a router Restlet that routes each call to a new instance of HelloWorldResource.
         Router router = new Router(getContext());
 
-        IDataStore dataStore = new MockDB();
+        IDataStore dataStore = new MongoDB();
 
         router.getContext().getAttributes().put("DATA_STORE", dataStore);
-        // Defines only one route
-        router.attach("/cycle/new", NewCycle.class);
-        router.attach("/temperature", Temperatures.class);
+
+        router.attach("/cycle/new", CycleNew.class);
+        router.attach("/cycle/queue", CycleQueue.class);
+        router.attach("/cycle/history", CycleHistory.class);
+        router.attach("/cycle/movetohistory", CycleMoveToHistory.class);
+        router.attach("/cycle/update", CycleUpdate.class);
+        router.attach("/cycle/cancel", CycleCancel.class);
+
+        router.attach("/temperature/get", TemperatureGet.class);
+        router.attach("/temperature/log", TemperatureLog.class);
 
         return router;
     }

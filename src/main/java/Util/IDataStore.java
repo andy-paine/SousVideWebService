@@ -19,7 +19,7 @@ public interface IDataStore {
 
     boolean logTemperature(Temperature temp);
 
-    boolean updateCycle(String id, List<Pair<String, ?>> updates);
+    boolean updateCycle(Cycle cycle);
 
     boolean cancelCycle(String cycleID);
 

@@ -1,5 +1,7 @@
 package Util;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -8,13 +10,13 @@ import java.util.UUID;
  * Created by andy on 05/10/15.
  */
 public class Cycle implements Comparable<Cycle> {
-    private String _id;
-    private Date date;
-    private String food;
-    private int rating;
-    private String comments;
-    private List<Stage> stages;
-    private boolean completed;
+    private String _id = UUID.randomUUID().toString();
+    @Expose private Date date;
+    @Expose private String food;
+    @Expose private int rating;
+    @Expose private String comments;
+    @Expose private List<Stage> stages;
+    private boolean completed = false;
 
     public Cycle() {
 
